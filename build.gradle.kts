@@ -27,27 +27,32 @@ kotlin {
     jvmToolchain(21)
 }
 
-tasks.build {
-    dependsOn("shadowJar")
-}
-
-tasks.shadowJar {
-    archiveClassifier.set("")
-}
-
-// Everything below here is just to resolve some build errors
-tasks.distZip {
-    dependsOn("shadowJar")
-}
-
-tasks.distTar {
-    dependsOn("shadowJar")
-}
-
-tasks.startScripts {
-    dependsOn("shadowJar")
-}
-
-tasks.startShadowScripts {
-    dependsOn("jar")
+tasks {
+    build {
+        dependsOn("shadowJar")
+    }
+    shadowJar {
+        archiveClassifier.set("")
+    }
+    jar {
+        enabled = false
+    }
+    shadowDistZip {
+        enabled = false
+    }
+    shadowDistTar {
+        enabled = false
+    }
+    startShadowScripts {
+        enabled = false
+    }
+    startScripts {
+        enabled = false
+    }
+    distTar {
+        enabled = false
+    }
+    distZip {
+        enabled = false
+    }
 }
